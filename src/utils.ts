@@ -57,6 +57,30 @@ export const removeDuplicates = (dominoes: Domino[]): Domino[] => {
   return uniqueDominoes;
 };
 
+export const removeDuplicatesByTotal = (dominoes: Domino[]): Domino[] => {
+  const sumCounts: { [key: number]: number } = {};
+  const sumToDominoes: { [key: number]: Domino[] } = {};
+
+  for (const [a, b] of dominoes) {
+    const sum = a + b;
+    sumCounts[sum] = (sumCounts[sum] || 0) + 1;
+    if (!sumToDominoes[sum]) {
+      sumToDominoes[sum] = [];
+    }
+    sumToDominoes[sum].push([a, b]);
+  }
+  console.log(sumToDominoes);
+
+  const uniqueDominoes: Domino[] = [];
+  for (const sum in sumCounts) {
+    if (sumCounts[parseInt(sum)] === 1) {
+      uniqueDominoes.push(...sumToDominoes[parseInt(sum)]);
+    }
+  }
+
+  return uniqueDominoes;
+};
+
 // Flips all dominoes
 export const flipDominoes = (dominoes: Domino[]): Domino[] => {
   return dominoes.map(([a, b]) => [b, a]);
@@ -69,9 +93,6 @@ export const removeByTotal = (dominoes: Domino[], total: number): Domino[] => {
 
 // additional features
 export const addNewDomino = (a: number, b: number, dominoes: Domino[]): Domino[] => {
-  //   if (a < 0 || b < 0 || a > 6 || b > 6) {
-  //     throw new Error("Domino numbers must be between 0 and 6");
-  //   }
   const newDomino: Domino = [a, b];
   return [...dominoes, newDomino];
 };

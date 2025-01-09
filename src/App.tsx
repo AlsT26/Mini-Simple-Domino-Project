@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./styles.css";
-import { addNewDomino, countDoubles, Domino, flipDominoes, initialDominoes, removeByTotal, removeDuplicates, sort } from "./utils";
+import { addNewDomino, countDoubles, Domino, flipDominoes, initialDominoes, removeByTotal, removeDuplicatesByTotal, sort } from "./utils";
 import Dots from "./components/Dots";
 
 const App: React.FC = () => {
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   };
 
   const handleRemoveDuplicates = () => {
-    const nonDup = removeDuplicates(dominoes);
+    const nonDup = removeDuplicatesByTotal(dominoes);
     setDominoes(nonDup);
   };
 
