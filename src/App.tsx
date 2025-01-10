@@ -49,7 +49,7 @@ const App: React.FC = () => {
 
     const updatedDominoes = addNewDomino(a, b, dominoes);
     setDominoes(updatedDominoes);
-    setNewDomino({ a: "", b: "" }); // Reset input fields
+    setNewDomino({ a: "", b: "" });
   };
 
   return (
@@ -77,15 +77,12 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Buttons */}
         <div className="flex flex-wrap gap-4">
-          {/* Count Doubles Button */}
           <button onClick={handleCountDoubles} className="bg-green-500 text-white py-2 px-4 rounded shadow hover:bg-green-600 flex items-center">
             Count Doubles
             <span className="ml-2 bg-white text-green-500 font-bold py-1 px-3 rounded shadow">{doubleCount}</span>
           </button>
 
-          {/* Reset Dominoes Button */}
           <button
             onClick={() => {
               setDominoes(initialDominoes);
@@ -96,7 +93,6 @@ const App: React.FC = () => {
             Reset Dominoes
           </button>
 
-          {/* Sorting Dominoes */}
           <button onClick={() => handleSort("asc")} className="bg-orange-400 text-white py-2 px-4 rounded shadow hover:bg-orange-600">
             Sort (ASC)
           </button>
@@ -104,18 +100,15 @@ const App: React.FC = () => {
             Sort (DESC)
           </button>
 
-          {/* Remove Duplicate */}
           <button onClick={() => handleRemoveDuplicates()} className="bg-red-400 text-white py-2 px-4 rounded shadow hover:bg-red-600">
             Remove Duplicate
           </button>
 
-          {/* Flip Domino Values */}
           <button onClick={() => handleFlipValues()} className="bg-blue-500 text-white py-2 px-4 rounded shadow hover:bg-blue-600">
             Flip Values
           </button>
         </div>
 
-        {/* Remove by Total */}
         <div className="flex flex-col items-center gap-4 mt-6">
           <div className="flex items-center gap-4">
             <input type="number" value={totalInput} onChange={(e) => setTotalInput(e.target.value === "" ? "" : parseInt(e.target.value))} placeholder="Enter total" className="border rounded px-4 py-2" />
@@ -125,7 +118,6 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Add Domino */}
         <div className="flex flex-col items-center gap-4 mt-6">
           <div className="flex items-center gap-4">
             <input type="number" value={newDomino.a} onChange={(e) => setNewDomino({ ...newDomino, a: e.target.value === "" ? "" : parseInt(e.target.value) })} placeholder="Enter first number" className="border rounded px-4 py-2" />

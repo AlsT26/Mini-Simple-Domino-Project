@@ -35,64 +35,62 @@ export const sort = (dominoes: Domino[], order: "asc" | "desc"): Domino[] => {
   return sortedDominoes;
 };
 
-export const removeDuplicates = (dominoes: Domino[]): Domino[] => {
-  const uniqueDominoes: Domino[] = [];
+// export const removeDuplicates = (dominoes: Domino[]): Domino[] => {
+//   const uniqueDominoes: Domino[] = [];
 
-  for (const domino of dominoes) {
-    const normalizedDomino: Domino = domino[0] <= domino[1] ? domino : [domino[1], domino[0]];
+//   for (const domino of dominoes) {
+//     const normalizedDomino: Domino = domino[0] <= domino[1] ? domino : [domino[1], domino[0]];
 
-    let isDuplicate = false;
-    for (const unique of uniqueDominoes) {
-      if (unique[0] === normalizedDomino[0] && unique[1] === normalizedDomino[1]) {
-        isDuplicate = true;
-        break;
-      }
-    }
+//     let isDuplicate = false;
+//     for (const unique of uniqueDominoes) {
+//       if (unique[0] === normalizedDomino[0] && unique[1] === normalizedDomino[1]) {
+//         isDuplicate = true;
+//         break;
+//       }
+//     }
 
-    if (!isDuplicate) {
-      uniqueDominoes.push(normalizedDomino);
-    }
-  }
+//     if (!isDuplicate) {
+//       uniqueDominoes.push(normalizedDomino);
+//     }
+//   }
 
-  return uniqueDominoes;
-};
+//   return uniqueDominoes;
+// };
 
 export const removeDuplicatesByTotal = (dominoes: Domino[]): Domino[] => {
   const sumCounts: { [key: number]: number } = {};
-  const sumToDominoes: { [key: number]: Domino[] } = {};
+  const sumOfDomino: { [key: number]: Domino[] } = {};
 
   for (const [a, b] of dominoes) {
     const sum = a + b;
     sumCounts[sum] = (sumCounts[sum] || 0) + 1;
-    if (!sumToDominoes[sum]) {
-      sumToDominoes[sum] = [];
+    if (!sumOfDomino[sum]) {
+      sumOfDomino[sum] = [];
     }
-    sumToDominoes[sum].push([a, b]);
+    sumOfDomino[sum].push([a, b]);
   }
-  console.log(sumToDominoes);
+  console.log(sumOfDomino);
 
   const uniqueDominoes: Domino[] = [];
   for (const sum in sumCounts) {
     if (sumCounts[parseInt(sum)] === 1) {
-      uniqueDominoes.push(...sumToDominoes[parseInt(sum)]);
+      uniqueDominoes.push(...sumOfDomino[parseInt(sum)]);
     }
   }
 
   return uniqueDominoes;
 };
 
-// Flips all dominoes
 export const flipDominoes = (dominoes: Domino[]): Domino[] => {
   return dominoes.map(([a, b]) => [b, a]);
 };
 
-// Removes dominoes with a specific total value
 export const removeByTotal = (dominoes: Domino[], total: number): Domino[] => {
   return dominoes.filter(([a, b]) => a + b !== total);
 };
 
-// additional features
 export const addNewDomino = (a: number, b: number, dominoes: Domino[]): Domino[] => {
   const newDomino: Domino = [a, b];
+  // return dominoes.push(newDomino);
   return [...dominoes, newDomino];
 };
